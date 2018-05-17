@@ -4,3 +4,11 @@
  Author:       Gerardo Moreno
  Template: Unite
 */
+
+.latest-films {
+    list-style: none;
+}
+.latest-films > li {
+    padding: 10px;
+    border-bottom: 1px solid #ececec;
+}

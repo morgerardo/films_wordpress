@@ -52,4 +52,31 @@ function get_film_data( $id ) {
 }
 add_action( 'the_film_data', 'get_film_data' );
 
+function get_latest_films( ){
+    $r = new WP_Query( array(
+        'posts_per_page'      => 5,
+        'no_found_rows'       => true,
+        'post_status'         => 'publish',
+        'ignore_sticky_posts' => true,
+        'post_type' => 'films'
+    ));
+
+    if ( ! $r->have_posts() ) {
+        return;
+    }
+
+    $result = "<ul class='latest-films'>";
+    foreach ( $r->posts as $recent_post ) : 
+            $post_title = get_the_title( $recent_post->ID );
+            $title      = ( ! empty( $post_title ) ) ? $post_title : __( '(no title)' );
+            $result .= "<li>";
+            $result .= "<a href=". get_the_permalink( $recent_post->ID ) .">". $title ."</a>";
+            $result .= "</li>";
+    endforeach;
+    $result .= "</ul>";
+
+	return $result;
+}
+add_shortcode( 'latest_films', 'get_latest_films' );
+
 ?>
