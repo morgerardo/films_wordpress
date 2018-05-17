@@ -26,7 +26,7 @@
 			$genre_query = wp_get_post_terms($post->ID, 'genre', array("fields" => "names"));
 			$country_query = wp_get_post_terms($post->ID, 'country', array("fields" => "names"));
 			$ticket_price = get_post_meta($post->ID, 'ticket_price')[0];
-			$release_date_query = get_post_meta($id, 'release_date')[0];
+			$release_date_query = get_post_meta($post->ID, 'release_date')[0];
 
 			$genre = empty($genre_query) ? "Not Available" : implode(", ", $genre_query);
 			$country = empty($country_query) ? "Not Available" : implode(", ", $country_query);
