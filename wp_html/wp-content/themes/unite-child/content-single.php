@@ -26,10 +26,11 @@
 			$genre_query = wp_get_post_terms($post->ID, 'genre', array("fields" => "names"));
 			$country_query = wp_get_post_terms($post->ID, 'country', array("fields" => "names"));
 			$ticket_price = get_post_meta($post->ID, 'ticket_price')[0];
-			
+			$release_date_query = get_post_meta($id, 'release_date')[0];
+
 			$genre = empty($genre_query) ? "Not Available" : implode(", ", $genre_query);
 			$country = empty($country_query) ? "Not Available" : implode(", ", $country_query);
-
+			$release_date = empty($release_date_query) ? "Not Available" : date('Y-m-d', strtotime($release_date_query));
 		?>
 		<p>
 			<strong>Country: </strong>
@@ -47,6 +48,12 @@
 			<strong>Ticket Price: </strong>
 			<?php
 				echo $ticket_price;
+			?>
+		</p>
+		<p>
+			<strong>Release Date: </strong>
+			<?php
+				echo $release_date;
 			?>
 		</p>
 		<?php
